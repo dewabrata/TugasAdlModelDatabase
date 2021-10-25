@@ -1,5 +1,6 @@
 package com.bioskop.main;
 
+import java.awt.EventQueue;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,47 +9,24 @@ import java.util.List;
 import com.bioskop.main.dao.FilmDaoImplementation;
 import com.bioskop.main.model.FilmModel;
 import com.bioskop.main.utility.DatabaseConnection;
+import com.bioskop.main.view.FilmForm;
 
 
 public class BioskopApp {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		try {
-			
-		     FilmModel film = new FilmModel();
-		     film.setFilmName("Beranak dalam Kardus");
-		     film.setCategory("Horror");
-		     film.setSubTitle("Sunda");
-		     
-		     FilmDaoImplementation filmDao = new FilmDaoImplementation();
-		     filmDao.save(film);
-		     
-		     
-		     List <FilmModel> lstFilm = filmDao.getAll();
-		     
-		     
-		     for (FilmModel filmModel : lstFilm) {
-				System.out.print(filmModel.getFilmId() +" | " +  filmModel.getFilmName()+" | " +  filmModel.getCategory()+" | " +  filmModel.getSubTitle());
-				System.out.println();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FilmForm frame = new FilmForm();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-		     
-		    FilmModel updateFilm = new FilmModel();
-		    updateFilm.setFilmId(6);
-		    updateFilm.setFilmName("Suzanna");
-		    updateFilm.setCategory("Horror");
-		    updateFilm.setSubTitle("Indonesia");
-		    filmDao.update(updateFilm); 
-		    
-		    
-		     
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		//st.execute("drop database dewa" );
+		});
+
 	}
 
 }
